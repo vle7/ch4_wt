@@ -13,4 +13,8 @@ class MoviesController < ApplicationController
     raise
     
   end
+  
+  def new
+    @movie = Movie.new
+  end
 end
