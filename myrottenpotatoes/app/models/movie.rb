@@ -1,3 +1,7 @@
 class Movie < ActiveRecord::Base
-  params.require(:movie).permit(:title, :rating, :description, :release_date)
+  private
+
+  def movie_params
+    params.require(:movie).permit(:title, :rating, :description, :release_date)
+  end
 end
