@@ -4,15 +4,19 @@ class MoviesController < ApplicationController
   end
   
   def show
-    begin
     id = params[:id]
     @movie = Movie.find(id)
-    end
-    
-    rescue ActiveRecord::RecordNotFound
-    raise
     
   end
+  
+  def create
+    params.require(:movie)
+    permitted = params[:movie].permit(:title,:rating,:release_date)
+    @movie = Movie.create!(permitted)
+    flash[:notice] = "#{@movie.title} was successfully created."
+    redirect_to movies_path
+  end
+  
   
   def new
     @movie = Movie.new
